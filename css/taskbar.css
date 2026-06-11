@@ -1,0 +1,72 @@
+/* ==============================================
+   DREAMBYTE OS - Taskbar
+   Application taskbar for future use
+   ============================================== */
+
+/* TASKBAR CONTAINER */
+#taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background: transparent;
+  z-index: var(--z-dock);
+  display: none;
+  align-items: center;
+  padding: 0;
+  border-top: none;
+}
+
+/* When taskbar is enabled */
+#taskbar.active {
+  display: flex;
+  height: 60px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-top: 1px solid var(--glass-border);
+}
+
+/* TASKBAR ITEMS */
+.taskbar-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding: 0 var(--spacing-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+}
+
+.taskbar-item:hover {
+  background: var(--glass-bg-hover);
+}
+
+.taskbar-item.active {
+  background: var(--glass-bg-hover);
+  border-top: 2px solid var(--primary);
+}
+
+.taskbar-icon {
+  font-size: 20px;
+}
+
+/* RESPONSIVE TASKBAR */
+@media (max-width: 768px) {
+  #taskbar {
+    display: none !important;
+  }
+}
+
+/* PRINT STYLES */
+@media print {
+  #taskbar {
+    display: none !important;
+  }
+}

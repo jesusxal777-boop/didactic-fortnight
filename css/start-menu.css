@@ -1,42 +1,388 @@
-#startMenu{
+/* ==============================================
+   DREAMBYTE OS - Start Menu Styles
+   Modern application launcher with search and organization
+   ============================================== */
 
-position:fixed;
-
-left:20px;
-bottom:90px;
-
-width:300px;
-
-padding:20px;
-
-display:none;
-
-background:
-rgba(255,255,255,.08);
-
-backdrop-filter:
-blur(30px);
-
-border-radius:25px;
-
+/* START MENU CONTAINER */
+#startMenu {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 400px;
+  max-height: 80vh;
+  background: var(--glass-bg);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  z-index: var(--z-menu);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.95);
+  transition: all var(--transition-base) cubic-bezier(0.34, 1.56, 0.64, 1);
+  -webkit-app-region: no-drag;
+  overflow: hidden;
 }
 
-#startMenu.show{
-display:block;
+#startMenu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
 }
 
-.app-launch{
+/* START MENU HEADER */
+.start-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  background: var(--glass-bg-hover);
+  border-bottom: 1px solid var(--glass-border);
+  flex-shrink: 0;
+}
 
-width:100%;
+.start-menu-header h2 {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
 
-padding:10px;
+.start-menu-header .close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 18px;
+  transition: all var(--transition-fast);
+  -webkit-app-region: no-drag;
+}
 
-margin-top:10px;
+.start-menu-header .close-btn:hover {
+  background: var(--glass-bg);
+  color: #ff3366;
+}
 
-border:none;
+/* SEARCH INPUT */
+.start-menu-search {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--glass-border);
+  flex-shrink: 0;
+}
 
-border-radius:10px;
+.search-input {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg);
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  transition: all var(--transition-fast);
+  -webkit-app-region: no-drag;
+}
 
-cursor:pointer;
+.search-input::placeholder {
+  color: var(--text-tertiary);
+}
 
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--glass-bg-hover);
+  box-shadow: 0 0 15px rgba(0, 150, 255, 0.3);
+}
+
+/* START MENU CONTENT */
+.start-menu-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--spacing-md);
+}
+
+.start-menu-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.start-menu-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.start-menu-content::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 3px;
+}
+
+.start-menu-content::-webkit-scrollbar-thumb:hover {
+  background: var(--glass-bg-hover);
+}
+
+/* START MENU SECTIONS */
+.start-menu-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.start-menu-section h3 {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: var(--spacing-md);
+  padding: 0 var(--spacing-sm);
+}
+
+/* APPS GRID (PINNED) */
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: var(--spacing-md);
+}
+
+/* APP ITEM IN GRID */
+.app-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  color: var(--text-primary);
+  -webkit-app-region: no-drag;
+}
+
+.app-tile:hover {
+  background: var(--glass-bg-hover);
+  transform: scale(1.05);
+}
+
+.app-tile:active {
+  transform: scale(0.95);
+}
+
+.app-tile-icon {
+  font-size: 36px;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1;
+}
+
+.app-tile-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* APPS LIST (RECENT) */
+.apps-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.app-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  width: 100%;
+  text-align: left;
+  color: var(--text-primary);
+  -webkit-app-region: no-drag;
+}
+
+.app-item:hover {
+  background: var(--glass-bg-hover);
+  transform: translateX(4px);
+}
+
+.app-item:active {
+  transform: translateX(0);
+}
+
+.app-item-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.app-item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  min-width: 0;
+}
+
+.app-item-name {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-item-meta {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+/* START MENU FOOTER */
+.start-menu-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  border-top: 1px solid var(--glass-border);
+  background: var(--glass-bg-hover);
+  flex-shrink: 0;
+  -webkit-app-region: no-drag;
+}
+
+.power-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  border-radius: var(--radius-lg);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+  -webkit-app-region: no-drag;
+}
+
+.power-btn:hover {
+  background: rgba(255, 51, 102, 0.2);
+  color: #ff6699;
+}
+
+/* EMPTY STATE */
+.start-menu-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.start-menu-empty-icon {
+  font-size: 48px;
+  margin-bottom: var(--spacing-lg);
+  opacity: 0.5;
+}
+
+.start-menu-empty-text {
+  font-size: var(--font-size-sm);
+}
+
+/* ANIMATIONS */
+.start-menu-section {
+  animation: slideUp 300ms ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE START MENU */
+@media (max-width: 768px) {
+  #startMenu {
+    width: 350px;
+    bottom: 80px;
+    right: 10px;
+  }
+  
+  .apps-grid {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  }
+  
+  .app-tile-icon {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  #startMenu {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-height: 70vh;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    transform: translateY(100%) scale(1);
+  }
+  
+  #startMenu.show {
+    transform: translateY(0) scale(1);
+  }
+  
+  .apps-grid {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: var(--spacing-sm);
+  }
+  
+  .app-tile-icon {
+    font-size: 28px;
+  }
+}
+
+/* SEARCH RESULTS HIGHLIGHT */
+.app-tile.hidden,
+.app-item.hidden {
+  display: none;
+}
+
+.app-tile.highlighted,
+.app-item.highlighted {
+  background: var(--glass-bg-hover);
+  border: 1px solid var(--primary);
+}
+
+/* FOCUS VISIBLE FOR ACCESSIBILITY */
+.app-tile:focus-visible,
+.app-item:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* PRINT STYLES */
+@media print {
+  #startMenu {
+    display: none;
+  }
 }

@@ -1,62 +1,446 @@
-.window{
+/* ==============================================
+   DREAMBYTE OS - Window Manager Styles
+   Complete window system with dragging, resizing, and focus
+   ============================================== */
 
-position:absolute;
-
-width:700px;
-height:500px;
-
-top:120px;
-left:200px;
-
-border-radius:25px;
-
-overflow:hidden;
-
-background:
-rgba(255,255,255,.08);
-
-backdrop-filter:
-blur(30px);
-
+/* WINDOW CONTAINER */
+.window-container {
+  position: fixed;
+  top: 44px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-windows);
+  pointer-events: none;
 }
 
-.hidden{
-display:none;
+.window-container > * {
+  pointer-events: auto;
 }
 
-.maximized{
-
-top:0 !important;
-left:0 !important;
-
-width:100vw !important;
-height:100vh !important;
-
-border-radius:0 !important;
-
+/* WINDOW BASE */
+.window {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background: var(--glass-bg);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  min-width: 300px;
+  min-height: 200px;
+  max-width: 90vw;
+  max-height: 90vh;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-app-region: no-drag;
+  overflow: hidden;
+  animation: windowOpen 300ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: center;
 }
 
-.window-header{
-
-height:50px;
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-padding:0 15px;
-
-cursor:move;
-
-background:
-rgba(255,255,255,.05);
-
+@keyframes windowOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.window-content{
+.window.closing {
+  animation: windowClose 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 
-height:calc(100% - 50px);
+@keyframes windowClose {
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
 
-padding:15px;
+/* WINDOW STATES */
+.window.focused {
+  box-shadow: 
+    0 25px 70px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(0, 150, 255, 0.2);
+}
 
+.window.minimized {
+  display: none;
+}
+
+.window.maximized {
+  top: 44px !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: calc(100% - 44px) !important;
+  border-radius: 0;
+}
+
+/* WINDOW TITLE BAR */
+.window-title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  background: var(--glass-bg-hover);
+  border-bottom: 1px solid var(--glass-border);
+  cursor: grab;
+  -webkit-app-region: drag;
+  user-select: none;
+  flex-shrink: 0;
+  height: 42px;
+}
+
+.window-title-bar.dragging {
+  cursor: grabbing;
+}
+
+.window-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex: 1;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.window-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.window-title-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* WINDOW CONTROLS */
+.window-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+  -webkit-app-region: no-drag;
+}
+
+.window-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 16px;
+  -webkit-app-region: no-drag;
+}
+
+.window-button:hover {
+  background: var(--glass-bg-hover);
+  color: var(--primary-light);
+}
+
+.window-button:active {
+  transform: scale(0.95);
+}
+
+.window-button.minimize {
+  /* Minimize button */
+}
+
+.window-button.maximize {
+  /* Maximize button */
+}
+
+.window-button.close {
+  color: #ff3366;
+}
+
+.window-button.close:hover {
+  background: rgba(255, 51, 102, 0.2);
+  color: #ff6699;
+}
+
+/* WINDOW CONTENT */
+.window-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: auto;
+  padding: var(--spacing-lg);
+  color: var(--text-primary);
+}
+
+.window-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.window-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.window-content::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 4px;
+}
+
+.window-content::-webkit-scrollbar-thumb:hover {
+  background: var(--glass-bg-hover);
+}
+
+/* WINDOW FOOTER */
+.window-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--glass-bg-hover);
+  border-top: 1px solid var(--glass-border);
+  flex-shrink: 0;
+  -webkit-app-region: no-drag;
+}
+
+.window-footer-info {
+  flex: 1;
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  -webkit-app-region: no-drag;
+}
+
+/* RESIZE HANDLES */
+.resize-handle {
+  position: absolute;
+  background: transparent;
+  z-index: 10;
+}
+
+.resize-handle.top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  cursor: ns-resize;
+}
+
+.resize-handle.bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  cursor: ns-resize;
+}
+
+.resize-handle.left {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  cursor: ew-resize;
+}
+
+.resize-handle.right {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  cursor: ew-resize;
+}
+
+.resize-handle.top-left {
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  cursor: nwse-resize;
+}
+
+.resize-handle.top-right {
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  cursor: nesw-resize;
+}
+
+.resize-handle.bottom-left {
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  cursor: nesw-resize;
+}
+
+.resize-handle.bottom-right {
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  cursor: nwse-resize;
+}
+
+/* WINDOW SNAP GUIDES */
+.snap-guide {
+  position: fixed;
+  background: var(--primary-light);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: var(--z-windows) - 1;
+}
+
+.snap-guide.vertical {
+  width: 2px;
+  height: 100%;
+}
+
+.snap-guide.horizontal {
+  width: 100%;
+  height: 2px;
+}
+
+/* WINDOW ANIMATIONS */
+.window.bouncing {
+  animation: bounce 0.6s ease-out;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(-20px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* WINDOW STACKING Z-INDEX */
+.window {
+  --z-index: 200;
+  z-index: var(--z-index);
+}
+
+.window.focused {
+  --z-index: 300;
+  z-index: var(--z-index);
+}
+
+/* WINDOW SIZES */
+.window.size-small {
+  width: 400px;
+  height: 300px;
+}
+
+.window.size-medium {
+  width: 600px;
+  height: 500px;
+}
+
+.window.size-large {
+  width: 800px;
+  height: 600px;
+}
+
+.window.size-full {
+  width: 90vw;
+  height: 85vh;
+}
+
+/* RESPONSIVE WINDOW BEHAVIOR */
+@media (max-width: 768px) {
+  .window {
+    min-width: 280px;
+    min-height: 180px;
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+  
+  .window.maximized {
+    top: 44px !important;
+    bottom: 0 !important;
+  }
+  
+  .window-button {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+  
+  .window-title-bar {
+    height: 38px;
+    padding: var(--spacing-sm);
+  }
+}
+
+/* PRINT STYLES */
+@media print {
+  .window-controls,
+  .resize-handle {
+    display: none;
+  }
+  
+  .window {
+    box-shadow: none;
+    border: 1px solid #000;
+    background: #fff;
+    color: #000;
+  }
+}
+
+/* ANIMATIONS FOR WINDOW TRANSITIONS */
+@keyframes slideInWindow {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutWindow {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+@keyframes fadeInWindow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.window.fade-in {
+  animation: fadeInWindow 250ms ease-out forwards;
+}
+
+.window.fade-out {
+  animation: fadeInWindow 250ms ease-out forwards reverse;
 }
