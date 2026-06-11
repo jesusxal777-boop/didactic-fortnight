@@ -10,7 +10,8 @@ width:100%;
 height:100%;
 background:#111;
 color:white;
-"></textarea>
+"
+oninput="autoSave()"></textarea>
 `
 );
 
