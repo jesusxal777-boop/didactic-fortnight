@@ -23,12 +23,28 @@ createWindow(
 "DreamByte Studio",
 
 `
-<h2>DreamByte Studio Dev Edition</h2>
 
-<p>
-Aquí irá el editor HTML/CSS/JS.
-</p>
+<div class="studio-layout">
+
+<textarea id="htmlCode"
+placeholder="HTML"></textarea>
+
+<textarea id="cssCode"
+placeholder="CSS"></textarea>
+
+<textarea id="jsCode"
+placeholder="JavaScript"></textarea>
+
+<button onclick="runStudio()">
+▶ Ejecutar
+</button>
+
+<iframe id="preview"></iframe>
+
+</div>
+
 `
+
 );
 
 }
