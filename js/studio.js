@@ -26,3 +26,22 @@ function runStudio() {
         `;
 
 }
+
+function autoSave(){
+
+localStorage.setItem(
+"htmlCode",
+document.getElementById("htmlCode").value
+);
+
+localStorage.setItem(
+"cssCode",
+document.getElementById("cssCode").value
+);
+
+localStorage.setItem(
+"jsCode",
+document.getElementById("jsCode").value
+);
+
+}
