@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DreamByte OS</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="background"></div>
+
+<header class="topbar">
+
+    <div class="logo">
+        💙 DreamByte OS
+    </div>
+
+    <button id="startButton">
+        🚀 Inicio
+    </button>
+
+</header>
+
+<div id="startMenu" class="start-menu hidden">
+
+    <h2>DreamByte OS</h2>
+
+    <div class="menu-app" onclick="openWindow('notesWindow')">
+        📝 Notes
+    </div>
+
+    <div class="menu-app" onclick="openWindow('paintWindow')">
+        🎨 Paint
+    </div>
+
+    <div class="menu-app">
+        🤖 Byte AI
+    </div>
+
+</div>
+
+<main>
+
+<div class="desktop-icon"
+onclick="openWindow('notesWindow')">
+📝
+<p>Notes</p>
+</div>
+
+<div class="desktop-icon"
+onclick="openWindow('paintWindow')">
+🎨
+<p>Paint</p>
+</div>
+
+</main>
+
+<div id="notesWindow"
+class="window hidden">
+
+<div class="window-header">
+
+<span>📝 DreamByte Notes</span>
+
+<button onclick="closeWindow('notesWindow')">
+✖
+</button>
+
+</div>
+
+<div class="window-content">
+
+<textarea placeholder="Escribe algo..."></textarea>
+
+</div>
+
+</div>
+
+<div id="paintWindow"
+class="window hidden">
+
+<div class="window-header">
+
+<span>🎨 DreamByte Paint</span>
+
+<button onclick="closeWindow('paintWindow')">
+✖
+</button>
+
+</div>
+
+<div class="window-content">
+
+<h2>Paint próximamente...</h2>
+
+</div>
+
+</div>
+
+<div class="dock">
+
+<div class="dock-icon">
+📝
+</div>
+
+<div class="dock-icon">
+🎨
+</div>
+
+<div class="dock-icon">
+🌐
+</div>
+
+<div class="dock-icon">
+🤖
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
