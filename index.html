@@ -1,126 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>DreamByte OS</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/liquid-glass.css">
+<link rel="stylesheet" href="css/windows.css">
+<link rel="stylesheet" href="css/dock.css">
+<link rel="stylesheet" href="css/start-menu.css">
+
 </head>
+
 <body>
 
-<div class="background"></div>
+<div id="wallpaper"></div>
 
-<header class="topbar">
+<header id="topbar">
 
-    <div class="logo">
-        💙 DreamByte OS
-    </div>
+<div class="logo">
+💙 DreamByte OS
+</div>
 
-    <button id="startButton">
-        🚀 Inicio
-    </button>
+<div class="topbar-actions">
+
+<button id="startBtn">
+🚀
+</button>
+
+</div>
 
 </header>
 
-<div id="startMenu" class="start-menu hidden">
-
-    <h2>DreamByte OS</h2>
-
-    <div class="menu-app" onclick="openWindow('notesWindow')">
-        📝 Notes
-    </div>
-
-    <div class="menu-app" onclick="openWindow('paintWindow')">
-        🎨 Paint
-    </div>
-
-    <div class="menu-app">
-        🤖 Byte AI
-    </div>
-
-</div>
-
-<main>
+<div id="desktop">
 
 <div class="desktop-icon"
-onclick="openWindow('notesWindow')">
+data-app="notes">
 📝
-<p>Notes</p>
+<span>Notes</span>
 </div>
 
 <div class="desktop-icon"
-onclick="openWindow('paintWindow')">
-🎨
-<p>Paint</p>
+data-app="studio">
+💻
+<span>Studio</span>
 </div>
 
-</main>
+<div class="desktop-icon"
+data-app="files">
+📁
+<span>Files</span>
+</div>
 
-<div id="notesWindow"
-class="window hidden">
+</div>
 
-<div class="window-header">
+<div id="startMenu">
 
-<span>📝 DreamByte Notes</span>
+<h2>DreamByte OS</h2>
 
-<button onclick="closeWindow('notesWindow')">
-✖
+<button class="app-launch"
+data-app="notes">
+📝 Notes
+</button>
+
+<button class="app-launch"
+data-app="studio">
+💻 Studio
+</button>
+
+<button class="app-launch"
+data-app="files">
+📁 Files
 </button>
 
 </div>
 
-<div class="window-content">
+<div id="windowContainer"></div>
 
-<textarea placeholder="Escribe algo..."></textarea>
+<div id="dock">
 
-</div>
-
-</div>
-
-<div id="paintWindow"
-class="window hidden">
-
-<div class="window-header">
-
-<span>🎨 DreamByte Paint</span>
-
-<button onclick="closeWindow('paintWindow')">
-✖
-</button>
+<div class="dock-icon">📝</div>
+<div class="dock-icon">💻</div>
+<div class="dock-icon">📁</div>
+<div class="dock-icon">⚙️</div>
 
 </div>
 
-<div class="window-content">
-
-<h2>Paint próximamente...</h2>
-
-</div>
-
-</div>
-
-<div class="dock">
-
-<div class="dock-icon">
-📝
-</div>
-
-<div class="dock-icon">
-🎨
-</div>
-
-<div class="dock-icon">
-🌐
-</div>
-
-<div class="dock-icon">
-🤖
-</div>
-
-</div>
-
-<script src="script.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/files.js"></script>
+<script src="js/windows.js"></script>
+<script src="js/apps.js"></script>
+<script src="js/desktop.js"></script>
 
 </body>
 </html>
