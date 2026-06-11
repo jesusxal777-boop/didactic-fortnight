@@ -20,6 +20,22 @@ blur(30px);
 
 }
 
+.hidden{
+display:none;
+}
+
+.maximized{
+
+top:0 !important;
+left:0 !important;
+
+width:100vw !important;
+height:100vh !important;
+
+border-radius:0 !important;
+
+}
+
 .window-header{
 
 height:50px;
