@@ -1,0 +1,184 @@
+/* ==============================================
+   DREAMBYTE OS - Theme System
+   ============================================== */
+
+/* THEME VARIABLES */
+:root {
+  --theme-name: 'default';
+}
+
+/* DEFAULT DARK THEME */
+:root[data-theme="default"] {
+  --primary: #0096ff;
+  --primary-light: #00d4ff;
+  --primary-dark: #004d99;
+  --accent: #ff1493;
+  --surface-dark: #08111e;
+  --surface: #0f213d;
+  --surface-light: #1a3a5c;
+}
+
+/* PURPLE THEME */
+:root[data-theme="purple"] {
+  --primary: #9d4edd;
+  --primary-light: #c77dff;
+  --primary-dark: #6a0dad;
+  --accent: #ff006e;
+  --surface-dark: #1a0e2e;
+  --surface: #2d1b4e;
+  --surface-light: #3d2670;
+}
+
+/* GREEN THEME */
+:root[data-theme="green"] {
+  --primary: #06d6a0;
+  --primary-light: #12f896;
+  --primary-dark: #04a373;
+  --accent: #118ab2;
+  --surface-dark: #0a2a1f;
+  --surface: #0f4a35;
+  --surface-light: #1a6b4f;
+}
+
+/* ORANGE THEME */
+:root[data-theme="orange"] {
+  --primary: #ff7700;
+  --primary-light: #ffaa33;
+  --primary-dark: #cc5500;
+  --accent: #ff3366;
+  --surface-dark: #2a1810;
+  --surface: #3d2817;
+  --surface-light: #6b4423;
+}
+
+/* PINK THEME */
+:root[data-theme="pink"] {
+  --primary: #ff006e;
+  --primary-light: #ff1493;
+  --primary-dark: #cc0056;
+  --accent: #00b4d8;
+  --surface-dark: #2a1220;
+  --surface: #3d1d33;
+  --surface-light: #5c2d4a;
+}
+
+/* CYAN THEME */
+:root[data-theme="cyan"] {
+  --primary: #00d9ff;
+  --primary-light: #00f5ff;
+  --primary-dark: #00a8cc;
+  --accent: #ff006e;
+  --surface-dark: #0a2a30;
+  --surface: #0f3d4a;
+  --surface-light: #1a5a6b;
+}
+
+/* LIGHT MODE BASE */
+body.light {
+  --surface-dark: #f5f5f7;
+  --surface: #ffffff;
+  --surface-light: #f0f0f3;
+  --surface-lighter: #e5e5ea;
+  --text-primary: #000000;
+  --text-secondary: rgba(0, 0, 0, 0.7);
+  --text-tertiary: rgba(0, 0, 0, 0.5);
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-bg-hover: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(0, 0, 0, 0.1);
+}
+
+/* LIGHT MODE + PURPLE THEME */
+body.light[data-theme="purple"] {
+  --primary: #7209b7;
+  --primary-light: #9d4edd;
+  --accent: #f72585;
+}
+
+/* LIGHT MODE + GREEN THEME */
+body.light[data-theme="green"] {
+  --primary: #2d6a4f;
+  --primary-light: #52b788;
+  --accent: #1b4965;
+}
+
+/* LIGHT MODE + ORANGE THEME */
+body.light[data-theme="orange"] {
+  --primary: #cc5500;
+  --primary-light: #ff7700;
+  --accent: #d62828;
+}
+
+/* HIGH CONTRAST MODE */
+body.high-contrast {
+  --glass-bg: rgba(0, 0, 0, 0.3);
+  --glass-bg-hover: rgba(0, 0, 0, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.3);
+}
+
+body.light.high-contrast {
+  --glass-bg: rgba(0, 0, 0, 0.1);
+  --glass-bg-hover: rgba(0, 0, 0, 0.2);
+  --glass-border: rgba(0, 0, 0, 0.3);
+}
+
+/* REDUCED MOTION */
+body.reduce-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* WALLPAPER THEMES */
+body[data-wallpaper="default"] #wallpaper {
+  background: linear-gradient(135deg, #08111e 0%, #0f213d 50%, #133d73 100%);
+}
+
+body[data-wallpaper="purple"] #wallpaper {
+  background: linear-gradient(135deg, #1a0f2e 0%, #2d1b4e 50%, #3d2670 100%);
+}
+
+body[data-wallpaper="green"] #wallpaper {
+  background: linear-gradient(135deg, #0a2a1f 0%, #0f4a35 50%, #1a6b4f 100%);
+}
+
+body[data-wallpaper="orange"] #wallpaper {
+  background: linear-gradient(135deg, #2a1810 0%, #3d2817 50%, #6b4423 100%);
+}
+
+body[data-wallpaper="pink"] #wallpaper {
+  background: linear-gradient(135deg, #2a1220 0%, #3d1d33 50%, #5c2d4a 100%);
+}
+
+body[data-wallpaper="cyan"] #wallpaper {
+  background: linear-gradient(135deg, #0a2a30 0%, #0f3d4a 50%, #1a5a6b 100%);
+}
+
+/* ACCESSIBILITY PREFERS COLOR SCHEME */
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+  }
+  
+  body {
+    background: #f5f5f7;
+    color: #000000;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* TRANSITION EFFECTS FOR THEME CHANGES */
+body.theme-transitioning {
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+body.theme-transitioning * {
+  transition: background-color var(--transition-base),
+              color var(--transition-base),
+              border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}

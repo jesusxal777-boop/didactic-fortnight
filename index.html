@@ -1,99 +1,124 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>DreamByte OS</title>
-
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/liquid-glass.css">
-<link rel="stylesheet" href="css/windows.css">
-<link rel="stylesheet" href="css/dock.css">
-<link rel="stylesheet" href="css/start-menu.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DreamByte OS - A professional web-based desktop environment">
+  <meta name="theme-color" content="#08111e">
+  
+  <title>DreamByte OS</title>
+  
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/liquid-glass.css">
+  <link rel="stylesheet" href="css/windows.css">
+  <link rel="stylesheet" href="css/dock.css">
+  <link rel="stylesheet" href="css/start-menu.css">
+  <link rel="stylesheet" href="css/taskbar.css">
+  <link rel="stylesheet" href="css/notifications.css">
+  <link rel="stylesheet" href="css/control-center.css">
 </head>
 
 <body>
+  <!-- Wallpaper Layer -->
+  <div id="wallpaper" class="wallpaper"></div>
 
-<div id="wallpaper"></div>
+  <!-- Top Bar / Menu Bar -->
+  <header id="topbar" class="topbar">
+    <div class="topbar-left">
+      <div class="logo">💙 DreamByte</div>
+    </div>
+    <div class="topbar-center">
+      <div class="time-display" id="timeDisplay"></div>
+    </div>
+    <div class="topbar-right">
+      <button id="controlCenterBtn" class="topbar-button" title="Control Center">⚙️</button>
+      <button id="startBtn" class="topbar-button" title="Start Menu">🚀</button>
+    </div>
+  </header>
 
-<header id="topbar">
+  <!-- Desktop Area -->
+  <main id="desktop" class="desktop"></main>
 
-<div class="logo">
-💙 DreamByte OS
-</div>
+  <!-- Start Menu -->
+  <nav id="startMenu" class="start-menu">
+    <div class="start-menu-header">
+      <h2>DreamByte OS</h2>
+      <button id="closeStartMenu" class="close-btn">✕</button>
+    </div>
+    
+    <div class="start-menu-search">
+      <input type="text" id="appSearch" class="search-input" placeholder="Search apps...">
+    </div>
+    
+    <div class="start-menu-section">
+      <h3>Pinned</h3>
+      <div id="pinnedAppsContainer" class="apps-grid"></div>
+    </div>
+    
+    <div class="start-menu-section">
+      <h3>Recent</h3>
+      <div id="recentAppsContainer" class="apps-list"></div>
+    </div>
+    
+    <div class="start-menu-footer">
+      <button class="power-btn" id="powerBtn">🔌 Power</button>
+    </div>
+  </nav>
 
-<div class="topbar-actions">
+  <!-- Control Center -->
+  <aside id="controlCenter" class="control-center">
+    <div class="control-center-header">
+      <h3>Control Center</h3>
+      <button id="closeControlCenter" class="close-btn">✕</button>
+    </div>
+    
+    <div class="control-center-grid">
+      <div class="control-tile" id="themeToggle">
+        <div class="control-icon">🌙</div>
+        <div class="control-label">Dark Mode</div>
+      </div>
+      
+      <div class="control-tile">
+        <div class="control-label">Volume</div>
+        <input type="range" id="volumeControl" min="0" max="100" value="100" class="control-slider">
+      </div>
+      
+      <div class="control-tile">
+        <div class="control-label">Brightness</div>
+        <input type="range" id="brightnessControl" min="0" max="100" value="100" class="control-slider">
+      </div>
+      
+      <div class="control-tile" id="bluetoothToggle">
+        <div class="control-icon">📡</div>
+        <div class="control-label">Bluetooth</div>
+      </div>
+    </div>
+  </aside>
 
-<button id="startBtn">
-🚀
-</button>
+  <!-- Notification Center -->
+  <div id="notificationCenter" class="notification-center"></div>
 
-</div>
+  <!-- Window Manager Container -->
+  <div id="windowContainer" class="window-container"></div>
 
-</header>
+  <!-- Dock -->
+  <nav id="dock" class="dock">
+    <!-- Dock icons are dynamically populated -->
+  </nav>
 
-<div id="desktop">
+  <!-- Taskbar (hidden, for future use) -->
+  <footer id="taskbar" class="taskbar"></footer>
 
-<div class="desktop-icon"
-data-app="notes">
-📝
-<span>Notes</span>
-</div>
+  <!-- Modal Overlay -->
+  <div id="modalOverlay" class="modal-overlay"></div>
 
-<div class="desktop-icon"
-data-app="studio">
-💻
-<span>Studio</span>
-</div>
+  <!-- Context Menu -->
+  <div id="contextMenu" class="context-menu"></div>
 
-<div class="desktop-icon"
-data-app="files">
-📁
-<span>Files</span>
-</div>
-
-</div>
-
-<div id="startMenu">
-
-<h2>DreamByte OS</h2>
-
-<button class="app-launch"
-data-app="notes">
-📝 Notes
-</button>
-
-<button class="app-launch"
-data-app="studio">
-💻 Studio
-</button>
-
-<button class="app-launch"
-data-app="files">
-📁 Files
-</button>
-
-</div>
-
-<div id="windowContainer"></div>
-
-<div id="dock">
-
-<div class="dock-icon">📝</div>
-<div class="dock-icon">💻</div>
-<div class="dock-icon">📁</div>
-<div class="dock-icon">⚙️</div>
-
-</div>
-
-<script src="js/storage.js"></script>
-<script src="js/files.js"></script>
-<script src="js/windows.js"></script>
-<script src="js/apps.js"></script>
-<script src="js/desktop.js"></script>
-
+  <!-- ES6 Module Scripts -->
+  <script type="module" src="js/core/module-loader.js"></script>
+  
 </body>
 </html>
